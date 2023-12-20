@@ -1,4 +1,4 @@
-package com.waterbird.wbapiinterface.utils;
+package com.waterbird.wbapisdk.utils;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;

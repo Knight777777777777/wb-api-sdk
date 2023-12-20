@@ -1,4 +1,4 @@
-package com.waterbird.wbapiinterface.model;
+package com.waterbird.wbapisdk.model;
 
 import lombok.Data;
 

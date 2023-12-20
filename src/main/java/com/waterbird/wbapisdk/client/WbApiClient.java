@@ -1,19 +1,17 @@
-package com.waterbird.wbapiinterface.client;
+package com.waterbird.wbapisdk.client;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.waterbird.wbapiinterface.model.User;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.waterbird.wbapisdk.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.waterbird.wbapiinterface.utils.SignUtils.genSign;
+import static com.waterbird.wbapisdk.utils.SignUtils.genSign;
+
 
 /**
  * 调用第三方接口的客户端
@@ -42,7 +40,7 @@ public class WbApiClient {
     }
 
 
-    public String getNameByPost(@RequestParam String name) {
+    public String getNameByPost(String name) {
         // 可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
@@ -65,13 +63,11 @@ public class WbApiClient {
         hashMap.put("timestamp", String.valueOf(System.currentTimeMillis()/1000));
         //添加签名
         hashMap.put("sign",genSign(body,secretKey));
-        // 密码绝不可以以明文的形式在服务器之间传播
-//        hashMap.put("secretKey", secretKey);
         // 返回构造的请求头 map
         return hashMap;
     }
 
-    public String getUserNameByPost(@RequestBody User user) {
+    public String getUserNameByPost(User user) {
         // 将User对象转换为JSON字符串
         String json = JSONUtil.toJsonStr(user);
         // 使用HttpRequest工具发起POST请求，并获取服务器的响应
