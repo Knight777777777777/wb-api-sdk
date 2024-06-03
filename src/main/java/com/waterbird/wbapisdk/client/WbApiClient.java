@@ -7,6 +7,8 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.waterbird.wbapisdk.model.User;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +53,7 @@ public class WbApiClient {
         return result;
     }
     // 创建一个私有方法，用于构造请求头
-    private Map<String, String> getHeaderMap(String body) {
+    private Map<String, String> getHeaderMap(String body) throws UnsupportedEncodingException {
         // 创建一个新的 HashMap 对象
         Map<String, String> hashMap = new HashMap<>();
         // 将 "accessKey" 和其对应的值放入 map 中
@@ -59,7 +61,7 @@ public class WbApiClient {
         //添加随机数
         hashMap.put("nonce", RandomUtil.randomNumbers(5));
         //请求具体内容
-        hashMap.put("body",body);
+        hashMap.put("body", URLEncoder.encode(body,"utf-8"));
         //添加时间戳
         hashMap.put("timestamp", String.valueOf(System.currentTimeMillis()/1000));
         //添加签名
@@ -68,7 +70,7 @@ public class WbApiClient {
         return hashMap;
     }
 
-    public String getUserNameByPost(User user) {
+    public String getUserNameByPost(User user) throws UnsupportedEncodingException {
         // 将User对象转换为JSON字符串
         String json = JSONUtil.toJsonStr(user);
         // 使用HttpRequest工具发起POST请求，并获取服务器的响应
