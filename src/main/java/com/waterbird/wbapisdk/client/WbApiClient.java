@@ -61,7 +61,7 @@ public class WbApiClient {
         //请求具体内容
         hashMap.put("body",body);
         //添加时间戳
-        hashMap.put("timestamp", String.valueOf(System.currentTimeMillis()/1000));
+        hashMap.put("timestamp", String.valueOf(System.currentTimeMillis()));
         //添加签名
         hashMap.put("sign",genSign(body,secretKey));
         // 返回构造的请求头 map
