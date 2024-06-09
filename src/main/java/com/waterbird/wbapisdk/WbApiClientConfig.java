@@ -1,6 +1,6 @@
 package com.waterbird.wbapisdk;
 
-import com.waterbird.wbapisdk.client.WbApiClient;
+import com.waterbird.wbapisdk.client.NameApiClient;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ public class WbApiClientConfig {
     private String secretKey;
 
     @Bean
-    public WbApiClient wbApiClient() {
-        return new WbApiClient(accessKey, secretKey);
+    public NameApiClient wbApiClient() {
+        return new NameApiClient(accessKey, secretKey);
     }
 }
